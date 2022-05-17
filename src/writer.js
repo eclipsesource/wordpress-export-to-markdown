@@ -175,6 +175,10 @@ function getPostPath(post, config) {
 		pathSegments.push(dt.toFormat('LL'));
 	}
 
+	if(config.dayFolders) {
+		pathSegments.push(dt.toFormat('dd'));
+	}
+
 	// create slug fragment, possibly date prefixed
 	let slugFragment = post.meta.slug;
 	if (config.prefixDate) {

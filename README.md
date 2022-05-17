@@ -88,6 +88,14 @@ Whether or not to organize output files into folders by year.
 
 Whether or not to organize output files into folders by month. You'll probably want to combine this with `--year-folders` to organize files by year then month.
 
+### Create day folders?
+
+- Argument: `--day-folders`
+- Type: `boolean`
+- Default: `false`
+
+Whether or not to organize output files into folders by day. You'll probably want to combine this with `--month-folders` to organize files by year then month and then day.
+
 ### Create a folder for each post?
 
 - Argument: `--post-folders`
@@ -168,3 +176,7 @@ Some WordPress sites make use of a `"page"` post type and/or custom post types. 
 You can edit [settings.js](https://github.com/lonekorean/wordpress-export-to-markdown/blob/master/src/settings.js) to tweak advanced settings. This includes things like throttling image downloads or customizing the date format in frontmatter.
 
 You'll need to run the script locally (not using `npx`) to make use of advanced settings.
+
+## Export author
+
+The script also exports the author from the xml file and transforms it to the display name of the author. For this to work you need to search and replace `dc:creator` with `author` in the xml file before starting the script.

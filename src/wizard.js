@@ -42,6 +42,13 @@ const options = [
 		default: false
 	},
 	{
+		name: 'day-folders',
+		aliases: ['yearmonthdayfolders'],
+		type: 'boolean',
+		description: 'Create day folders',
+		default: false
+	},
+	{
 		name: 'post-folders',
 		aliases: ['postfolders'],
 		type: 'boolean',

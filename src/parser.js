@@ -69,6 +69,7 @@ function collectPosts(data, postTypes, config) {
 					title: getPostTitle(post),
 					date: getPostDate(post),
 					categories: getCategories(post),
+					author: getAuthor(post),
 					tags: getTags(post)
 				},
 				content: translator.getPostContent(post, turndownService, config)
@@ -118,6 +119,117 @@ function getPostDate(post) {
 		return dateTime.toISO();
 	} else {
 		return dateTime.toISODate();
+	}
+}
+
+function getAuthor(post) {
+	const author = '' + post.author;
+	switch (author) {
+		case 'beyhan': {
+			return 'Beyhan Veliev';
+		}
+		case 'bmuskalla': {
+			return 'Benjamin Muskalla';
+		}
+		case 'cpetrov': {
+			return 'Christian Petrov';
+		}
+		case 'dbuschtoens': {
+			return 'David Buschtoens';
+		}
+		case 'eclipsesource_author': {
+			return 'EclipseSource Team';
+		}
+		case 'elias': {
+			return 'Elias Volanakis';
+		}
+		case 'fwaibel': {
+			return 'Florian Waibel';
+		}
+		case 'gosia': {
+			return 'Gosia Mitros';
+		}
+		case 'helmingkoegel': {
+			return 'Jonas Helming, Maximilian Koegel and Philip Langer';
+		}
+		case 'hstaudacher': {
+			return 'Holger Staudacher';
+		}
+		case 'irbull': {
+			return 'Ian Bull';
+		}
+		case 'ivan': {
+			return 'Ivan Furnadjiev';
+		}
+		case 'jeff': {
+			return 'Jeff McAffer';
+		}
+		case 'jeick': {
+			return 'Johannes Eickhold';
+		}
+		case 'jfgerken': {
+			return 'Jorina Freya Gerken';
+		}
+		case 'jhelming': {
+			return 'Jonas Helming';
+		}
+		case 'jordi': {
+			return 'Jordi Boehme Lopez';
+		}
+		case 'manuel': {
+			return 'Manuel Woelker';
+		}
+		case 'mkempka': {
+			return 'Matthias Kempka';
+		}
+		case 'mknauer': {
+			return 'Markus Knauer';
+		}
+		case 'mkoegel': {
+			return 'Maximilian Koegel';
+		}
+		case 'mpost': {
+			return 'Moritz Post';
+		}
+		case 'nmussin': {
+			return 'Nick Mussin';
+		}
+		case 'rchandrashekar': {
+			return 'Rahul Chandrashekar';
+		}
+		case 'rherrmann': {
+			return 'Ruediger Herrmann';
+		}
+		case 'rsternberg': {
+			return 'Ralf Sternberg';
+		}
+		case 'Samy': {
+			return 'Samy Abou Shama';
+		}
+		case 'shai': {
+			return 'Shai Alon';
+		}
+		case 'slewis': {
+			return 'Scott Lewis';
+		}
+		case 'tim': {
+			return 'Tim Buschtoens';
+		}
+		case 'tschindl': {
+			return 'Tom Schindl';
+		}
+		case 'tseidel': {
+			return 'Tillmann Seidel';
+		}
+		case 'vasko': {
+			return 'Vassiliy Tchoumatchenko';
+		}
+		case 'zx': {
+			return 'Chris Aniszczyk';
+		}
+		default: {
+			return author;
+		}
 	}
 }
 
