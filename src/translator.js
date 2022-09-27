@@ -16,6 +16,27 @@ function initTurndownService() {
 		replacement: (content, node) => '\n\n' + node.outerHTML
 	});
 
+	turndownService.addRule('images', {
+		filter: 'img',
+		replacement: function (content, node) {
+			const html = node.outerHTML.replace(/([>])/, ' style="display: block; margin: 0 auto"' + '$1');
+			return html;
+		}
+	});
+
+	turndownService.addRule('codeblock', {
+		filter: node => {
+			return (node.getAttribute("class") === "EnlighterJSRAW" && node.attributes['data-enlighter-language'])
+		},
+		replacement: (content, node) => {
+			var language = node.getAttribute("data-enlighter-language");
+			if (language === "raw") {
+				language = "typescript";
+			}
+			return "\n" + "```" + language + "\n" + node.textContent + "\n" + "```" + "\n"
+		}
+	})
+
 	// preserve embedded codepens
 	turndownService.addRule('codepen', {
 		filter: node => {
