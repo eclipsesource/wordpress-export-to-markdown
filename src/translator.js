@@ -19,7 +19,7 @@ function initTurndownService() {
 	turndownService.addRule('images', {
 		filter: 'img',
 		replacement: function (content, node) {
-			const html = node.outerHTML.replace(/([>])/, ' style="display: block; margin: 0 auto"' + '$1');
+			const html = node.outerHTML.replace(/([>])/, ' style="display: block; margin: 0 auto" loading="lazy"' + '$1');
 			return html;
 		}
 	});
@@ -29,11 +29,23 @@ function initTurndownService() {
 			return (node.getAttribute("class") === "EnlighterJSRAW" && node.attributes['data-enlighter-language'])
 		},
 		replacement: (content, node) => {
-			var language = node.getAttribute("data-enlighter-language");
+			var language = node.getAttribute("data-enlighter-language")
 			if (language === "raw") {
 				language = "typescript";
 			}
-			return "\n" + "```" + language + "\n" + node.textContent + "\n" + "```" + "\n"
+			return "\n" + "```" + language + "\n" + node.textContent + "\n" + "```" + "\n";
+		}})
+
+	turndownService.addRule('codeblock_pre', {
+		filter: node => {
+			return(node.attributes["lang"])
+		},
+		replacement: (content, node) => {
+			var language = node.getAttribute("lang");
+			if(language === "undefined"){
+				language = "typescript"
+			}
+			return "\n" + "```" + language + "\n" + node.textContent + "\n" + "```" + "\n";
 		}
 	})
 
