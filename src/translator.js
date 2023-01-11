@@ -130,17 +130,6 @@ function getPostContent(post, turndownService, config) {
 			content = content.replaceAll('<h1>', '<h3>');
 			content = content.replaceAll('</h1>', '</h3>');
 			break; 
-		} 
-		case 2: {
-			content = content.replaceAll('<h5>', '<h6>');
-			content = content.replaceAll('</h5>', '</h6>');
-			content = content.replaceAll('<h4>', '<h5>');
-			content = content.replaceAll('</h4>', '</h5>');
-			content = content.replaceAll('<h3>', '<h4>');
-			content = content.replaceAll('</h3>', '</h4>');
-			content = content.replaceAll('<h2>', '<h3>');
-			content = content.replaceAll('</h2>', '</h3>');
-			break; 
 		}
 		default: {
 			break; 
