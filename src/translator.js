@@ -19,7 +19,7 @@ function initTurndownService() {
 	turndownService.addRule('images', {
 		filter: 'img',
 		replacement: function (content, node) {
-			const html = node.outerHTML.replace(/([>])/, ' style="display: block; margin: 0 auto" loading="lazy"' + '$1');
+			const html = node.outerHTML.replace(/([>])/, ' loading="lazy"' + '$1');
 			return html;
 		}
 	});
@@ -89,8 +89,63 @@ function initTurndownService() {
 	return turndownService;
 }
 
+function getHighestHeader(content) {
+	if(content.includes('<h1>')) {
+		return 1;
+	}
+	if(content.includes('<h2>')) {
+		return 2;
+	}
+	if(content.includes('<h3>')) {
+		return 3;
+	}
+	if(content.includes('<h4>')) {
+		return 4;
+	}
+	if(content.includes('<h5>')) {
+		return 5;
+	}
+	if(content.includes('<h6>')) {
+		return 6;
+	}
+	return 1;
+}
+
 function getPostContent(post, turndownService, config) {
 	let content = post.encoded[0];
+
+	content = content.replace(/<h(\d).{0,}id="(.*?)".{0,}?>(.*?)<\/h\d>/, '<h$1>anchorLink123 name="$2">/anchorLink123>$3</h$1>');
+
+	let highestHeader = getHighestHeader(content);
+	switch(highestHeader) { 
+		case 1: {
+			content = content.replaceAll('<h5>', '<h6>');
+			content = content.replaceAll('</h5>', '</h6>');
+			content = content.replaceAll('<h4>', '<h6>');
+			content = content.replaceAll('</h4>', '</h6>');
+			content = content.replaceAll('<h3>', '<h5>');
+			content = content.replaceAll('</h3>', '</h5>');
+			content = content.replaceAll('<h2>', '<h4>');
+			content = content.replaceAll('</h2>', '</h4>');
+			content = content.replaceAll('<h1>', '<h3>');
+			content = content.replaceAll('</h1>', '</h3>');
+			break; 
+		} 
+		case 2: {
+			content = content.replaceAll('<h5>', '<h6>');
+			content = content.replaceAll('</h5>', '</h6>');
+			content = content.replaceAll('<h4>', '<h5>');
+			content = content.replaceAll('</h4>', '</h5>');
+			content = content.replaceAll('<h3>', '<h4>');
+			content = content.replaceAll('</h3>', '</h4>');
+			content = content.replaceAll('<h2>', '<h3>');
+			content = content.replaceAll('</h2>', '</h3>');
+			break; 
+		}
+		default: {
+			break; 
+		} 
+	} 
 
 	// insert an empty div element between double line breaks
 	// this nifty trick causes turndown to keep adjacent paragraphs separated
@@ -116,6 +171,8 @@ function getPostContent(post, turndownService, config) {
 
 	// clean up the "." from the iframe hack above
 	content = content.replace(/\.(<\/iframe>)/gi, '$1');
+	content = content.replace('/anchorLink123', '</a');
+	content = content.replace('anchorLink123', '<a');
 
 	return content;
 }
