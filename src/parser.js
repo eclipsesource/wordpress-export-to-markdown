@@ -153,7 +153,7 @@ function getAuthor(post) {
 			return 'Gosia Mitros';
 		}
 		case 'helmingkoegel': {
-			return 'Jonas Helming, Maximilian Koegel and Philip Langer';
+			return 'Jonas, Maximilian and Philip';
 		}
 		case 'hstaudacher': {
 			return 'Holger Staudacher';
