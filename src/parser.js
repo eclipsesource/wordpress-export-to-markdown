@@ -5,8 +5,6 @@ const xml2js = require('xml2js');
 const shared = require('./shared');
 const settings = require('./settings');
 const translator = require('./translator');
-const { description } = require('commander');
-const { post } = require('request');
 
 async function parseFilePromise(config) {
 	console.log('\nParsing...');
@@ -258,9 +256,8 @@ function processCategoryTags(post, domain) {
 function getDescription(post){
 	const postmeta = post.postmeta.find(postmeta => postmeta.meta_key[0] === '_yoast_wpseo_metadesc');
 	if(postmeta === undefined){
-		return " ";
+		return "";
 	} else{
-		console.log(postmeta.meta_value);
 	return postmeta.meta_value;
 }
 }
