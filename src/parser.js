@@ -70,7 +70,8 @@ function collectPosts(data, postTypes, config) {
 					date: getPostDate(post),
 					categories: getCategories(post),
 					author: getAuthor(post),
-					tags: getTags(post)
+					tags: getTags(post),
+					description: getDescription(post)
 				},
 				content: translator.getPostContent(post, turndownService, config)
 			}));
@@ -150,7 +151,7 @@ function getAuthor(post) {
 			return 'Gosia Mitros';
 		}
 		case 'helmingkoegel': {
-			return 'Jonas Helming, Maximilian Koegel and Philip Langer';
+			return 'Jonas, Maximilian and Philip';
 		}
 		case 'hstaudacher': {
 			return 'Holger Staudacher';
@@ -250,6 +251,15 @@ function processCategoryTags(post, domain) {
 	return post.category
 		.filter(category => category.$.domain === domain)
 		.map(({ $: attributes }) => decodeURIComponent(attributes.nicename));
+}
+
+function getDescription(post){
+	const postmeta = post.postmeta.find(postmeta => postmeta.meta_key[0] === '_yoast_wpseo_metadesc');
+	if(postmeta === undefined){
+		return "";
+	} else{
+	return postmeta.meta_value;
+}
 }
 
 function collectAttachedImages(data) {
